@@ -1,1 +1,32 @@
+name: Run Jest Tests
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+ 
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Vérifier le code source depuis le dépôt
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # 2. Installer Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18 # Ou la version que vous utilisez
+
+    # 3. Installer les dépendances
+    - name: Install dependencies
+      run: npm install
+
+    # 4. Exécuter les tests
+    - name: Run Jest tests
+      run: npm test
